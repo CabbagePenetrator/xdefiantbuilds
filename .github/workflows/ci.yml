@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   tests:
@@ -75,3 +75,13 @@ jobs:
 
       - name: Execute Tests
         run: vendor/bin/pest --parallel
+
+  forge-deploy:
+    name: "Deploy to Laravel Forge"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy
+        uses: jbrooksuk/laravel-forge-action@v1.0.2
+        with:
+          trigger_url: ${{ secrets.TRIGGER_URL }}
