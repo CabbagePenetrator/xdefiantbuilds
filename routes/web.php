@@ -3,11 +3,6 @@
 use App\Http\Controllers\LoadoutController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -16,7 +11,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', [LoadoutController::class, 'index'])
-    ->name('loadouts')
+    ->name('home')
     ->middleware('auth');
 
 Route::post('/loadouts', [LoadoutController::class, 'store'])
