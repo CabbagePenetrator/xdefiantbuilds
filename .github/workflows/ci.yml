@@ -79,6 +79,7 @@ jobs:
   forge-deploy:
     name: "Deploy to Laravel Forge"
     runs-on: ubuntu-latest
+    needs: tests
 
     steps:
       - name: Deploy
