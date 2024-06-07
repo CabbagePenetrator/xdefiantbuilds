@@ -19,11 +19,19 @@ class LoadoutController extends Controller
 
     public function store(Request $request)
     {
-        Loadout::create(
-            $request->validate([
-                'name' => ['required', 'string', 'max:25'],
-                'gun_id' => ['required', 'exists:guns,id'],
-            ])
+        $request->validate([
+            'name' => ['required', 'string', 'max:25'],
+            'gun_id' => ['required', 'exists:guns,id'],
+            'attachments' => ['required', 'array'],
+            'attachments.*' => ['required', 'distinct', 'exists:attachments,id'],
+        ]);
+
+        $loadout = Loadout::create(
+            $request->only('name', 'gun_id')
+        );
+
+        $loadout->attachments()->attach(
+            $request->input('attachments')
         );
 
         return back();
@@ -38,11 +46,19 @@ class LoadoutController extends Controller
 
     public function update(Request $request, Loadout $loadout)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:25'],
+            'gun_id' => ['required', 'exists:guns,id'],
+            'attachments' => ['required', 'array'],
+            'attachments.*' => ['required', 'distinct', 'exists:attachments,id'],
+        ]);
+
         $loadout->update(
-            $request->validate([
-                'name' => ['required', 'string', 'max:25'],
-                'gun_id' => ['required', 'exists:guns,id'],
-            ])
+            $request->only('name', 'gun_id')
+        );
+
+        $loadout->attachments()->sync(
+            $request->input('attachments')
         );
 
         return back();

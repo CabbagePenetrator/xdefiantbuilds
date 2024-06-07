@@ -1,12 +1,12 @@
 <?php
 
+use App\Models\Attachment;
 use App\Models\Gun;
 use App\Models\Loadout;
 use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
 
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertModelMissing;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
@@ -35,16 +35,19 @@ test('all loadouts can be viewed', function () {
 test('a loadout can be created', function () {
     $gun = Gun::factory()->create();
 
+    $attachments = Attachment::factory()->count(3)->create();
+
     post('/loadouts', [
         'gun_id' => $gun->id,
+        'attachments' => $attachments->pluck('id')->all(),
         'name' => 'new loadout',
     ])->assertRedirect();
 
-    assertDatabaseHas(Loadout::class, [
-        'gun_id' => $gun->id,
-        'name' => 'new loadout',
-        'votes' => 0,
-    ]);
+    $loadout = Loadout::where('name', 'new loadout')->first();
+
+    expect($loadout->gun_id)->toBe($gun->id);
+
+    expect($loadout->attachments()->count())->toBe(3);
 });
 
 test('a loadout can be viewed', function () {
@@ -61,19 +64,23 @@ test('a loadout can be viewed', function () {
 test('a loadout can be updated', function () {
     $gun = Gun::factory()->create();
 
-    $loadout = Loadout::factory()->create([
+    $attachments = Attachment::factory()->count(4)->create();
+
+    $loadout = Loadout::factory()->has(Attachment::factory())->create([
         'name' => 'old loadout name',
     ]);
 
     put('/loadouts/'.$loadout->id, [
-        'name' => 'new loadout name',
         'gun_id' => $gun->id,
+        'attachments' => $attachments->pluck('id')->all(),
+        'name' => 'new loadout name',
     ])->assertRedirect();
 
-    assertDatabaseHas(Loadout::class, [
-        'name' => 'new loadout name',
-        'gun_id' => $gun->id,
-    ]);
+    $loadout = Loadout::where('name', 'new loadout name')->first();
+
+    expect($loadout->gun_id)->toBe($gun->id);
+
+    expect($loadout->attachments()->count())->toBe(4);
 });
 
 test('a loadout can be deleted', function () {
