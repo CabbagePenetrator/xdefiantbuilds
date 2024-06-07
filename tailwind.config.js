@@ -12,6 +12,12 @@ export default {
 
   theme: {
     extend: {
+      colors: {
+        'light-blue': '#3C4F6D',
+        blue: '#2A3B56',
+        'dark-blue': '#1C233D',
+        yellow: '#EDCE52',
+      },
       fontFamily: {
         sans: ['Helvetica', ...defaultTheme.fontFamily.sans],
       },

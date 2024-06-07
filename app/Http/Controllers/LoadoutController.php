@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use App\Http\Resources\LoadoutResource;
+use App\Models\Category;
 use App\Models\Loadout;
 use Illuminate\Http\Request;
 
@@ -10,10 +12,18 @@ class LoadoutController extends Controller
 {
     public function index()
     {
-        $loadouts = Loadout::query()->get();
+        $loadouts = Loadout::query()
+            ->whereHas('gun.category', function ($query) {
+                $query->where('name', 'Assault');
+            })
+            ->with('user', 'gun.category')
+            ->get();
+
+        $categories = Category::query()->get();
 
         return inertia('Loadouts/Index', [
             'loadouts' => LoadoutResource::collection($loadouts),
+            'categories' => CategoryResource::collection($categories),
         ]);
     }
 
@@ -26,7 +36,7 @@ class LoadoutController extends Controller
             'attachments.*' => ['required', 'distinct', 'exists:attachments,id'],
         ]);
 
-        $loadout = Loadout::create(
+        $loadout = $request->user()->loadouts()->create(
             $request->only('name', 'gun_id')
         );
 

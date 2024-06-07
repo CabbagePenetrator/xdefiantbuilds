@@ -5,7 +5,7 @@
   },
   {
     "id": 2,
-    "name": "SMG"
+    "name": "smg"
   },
   {
     "id": 3,
@@ -13,11 +13,11 @@
   },
   {
     "id": 4,
-    "name": "LMG"
+    "name": "lmg"
   },
   {
     "id": 5,
-    "name": "Marksman"
+    "name": "marksman"
   },
   {
     "id": 6,

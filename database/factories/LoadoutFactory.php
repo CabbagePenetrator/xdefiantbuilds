@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Gun;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class LoadoutFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::factory(),
             'gun_id' => Gun::factory(),
             'name' => fake()->text(25),
         ];

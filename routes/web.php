@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryLoadoutController;
 use App\Http\Controllers\LoadoutController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +28,8 @@ Route::put('/loadouts/{loadout}', [LoadoutController::class, 'update'])
 Route::delete('/loadouts/{loadout}', [LoadoutController::class, 'destroy'])
     ->name('loadouts.destroy')
     ->middleware('auth');
+
+Route::get('/{category:name}/loadouts', [CategoryLoadoutController::class, 'index'])
+    ->name('categories.loadouts');
 
 require __DIR__.'/auth.php';

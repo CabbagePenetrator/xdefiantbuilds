@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Attachment;
+use App\Models\Category;
 use App\Models\Gun;
 use App\Models\Loadout;
 use App\Models\User;
@@ -12,23 +13,39 @@ use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\put;
+use function Pest\Laravel\withoutExceptionHandling;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
     actingAs($this->user);
 });
 
-test('all loadouts can be viewed', function () {
-    $loadouts = Loadout::factory()->count(3)->create();
+test('the loadouts page can be viewed', function () {
+    Loadout::factory()->count(3)->create();
 
     get('/')
         ->assertOk()
         ->assertInertia(fn (Assert $page) => $page
             ->component('Loadouts/Index')
-            ->has('loadouts', 3, fn (Assert $page) => $page
-                ->where('name', $loadouts->first()->name)
-                ->etc()
-            )
+            ->has('loadouts', 3)
+            ->has('categories', 3)
+        );
+});
+
+test('loadouts for a category can be viewed', function () {
+    withoutExceptionHandling();
+    $category = Category::factory()->create();
+
+    $gun = Gun::factory()->for($category)->create();
+
+    Loadout::factory()->count(3)->for($gun)->create();
+
+    get('/'.$category->name.'/loadouts')
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('Categories/Loadouts/Index')
+            ->has('loadouts', 3)
+            ->has('categories', 1)
         );
 });
 
@@ -45,6 +62,8 @@ test('a loadout can be created', function () {
 
     $loadout = Loadout::where('name', 'new loadout')->first();
 
+    expect($loadout->user_id)->toBe($this->user->id);
+
     expect($loadout->gun_id)->toBe($gun->id);
 
     expect($loadout->attachments()->count())->toBe(3);
@@ -57,7 +76,10 @@ test('a loadout can be viewed', function () {
         ->assertOk()
         ->assertInertia(fn (Assert $page) => $page
             ->component('Loadouts/Show')
-            ->has('loadout')
+            ->has('loadout', fn (Assert $page) => $page
+                ->where('name', $loadout->name)
+                ->etc()
+            )
         );
 });
 
