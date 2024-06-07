@@ -11,16 +11,14 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', [LoadoutController::class, 'index'])
-    ->name('home')
-    ->middleware('auth');
+    ->name('home');
 
 Route::post('/loadouts', [LoadoutController::class, 'store'])
     ->name('loadouts.store')
     ->middleware('auth');
 
 Route::get('/loadouts/{loadout}', [LoadoutController::class, 'show'])
-    ->name('loadouts.show')
-    ->middleware('auth');
+    ->name('loadouts.show');
 
 Route::put('/loadouts/{loadout}', [LoadoutController::class, 'update'])
     ->name('loadouts.update')
