@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "assault"
+  },
+  {
+    "id": 2,
+    "name": "SMG"
+  },
+  {
+    "id": 3,
+    "name": "shotgun"
+  },
+  {
+    "id": 4,
+    "name": "LMG"
+  },
+  {
+    "id": 5,
+    "name": "Marksman"
+  },
+  {
+    "id": 6,
+    "name": "sniper"
+  }
+]

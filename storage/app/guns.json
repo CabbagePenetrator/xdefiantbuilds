@@ -1,0 +1,97 @@
+[
+  {
+    "id": 1,
+    "name": "ACR",
+    "category_id": 1
+  },
+  {
+    "id": 2,
+    "name": "MDR",
+    "category_id": 1
+  },
+  {
+    "id": 3,
+    "name": "AK-47",
+    "category_id": 1
+  },
+  {
+    "id": 4,
+    "name": "M4A1",
+    "category_id": 1
+  },
+  {
+    "id": 5,
+    "name": "M16A4",
+    "category_id": 1
+  },
+  {
+    "id": 6,
+    "name": "MP7",
+    "category_id": 2
+  },
+  {
+    "id": 7,
+    "name": "P90",
+    "category_id": 2
+  },
+  {
+    "id": 8,
+    "name": "Vector .45 ACP",
+    "category_id": 2
+  },
+  {
+    "id": 9,
+    "name": "MP5A2",
+    "category_id": 2
+  },
+  {
+    "id": 10,
+    "name": "Double Barrel",
+    "category_id": 3
+  },
+  {
+    "id": 12,
+    "name": "AA-12",
+    "category_id": 3
+  },
+  {
+    "id": 13,
+    "name": "M870",
+    "category_id": 3
+  },
+  {
+    "id": 14,
+    "name": "M60",
+    "category_id": 4
+  },
+  {
+    "id": 15,
+    "name": "M249",
+    "category_id": 4
+  },
+  {
+    "id": 16,
+    "name": "RPK-74",
+    "category_id": 4
+  },
+  {
+    "id": 17,
+    "name": "MK 20 SSR",
+    "category_id": 5
+  },
+  {
+    "id": 18,
+    "name": "SVD",
+    "category_id": 5
+  },
+  {
+    "id": 19,
+    "name": "M44",
+    "category_id": 6
+  },
+  {
+    "id": 20,
+    "name": "TAC-50",
+    "category_id": 6
+  }
+]
