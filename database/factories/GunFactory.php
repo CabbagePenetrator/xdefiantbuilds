@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Gun;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Loadout>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Gun>
  */
-class LoadoutFactory extends Factory
+class GunFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +18,8 @@ class LoadoutFactory extends Factory
     public function definition(): array
     {
         return [
-            'gun_id' => Gun::factory(),
             'name' => fake()->text(25),
+            'category_id' => Category::factory(),
         ];
     }
 }

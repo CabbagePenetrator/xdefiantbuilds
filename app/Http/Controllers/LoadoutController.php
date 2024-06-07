@@ -22,6 +22,7 @@ class LoadoutController extends Controller
         Loadout::create(
             $request->validate([
                 'name' => ['required', 'string', 'max:25'],
+                'gun_id' => ['required', 'exists:guns,id'],
             ])
         );
 
@@ -40,6 +41,7 @@ class LoadoutController extends Controller
         $loadout->update(
             $request->validate([
                 'name' => ['required', 'string', 'max:25'],
+                'gun_id' => ['required', 'exists:guns,id'],
             ])
         );
 

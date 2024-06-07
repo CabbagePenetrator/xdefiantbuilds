@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Gun;
 use App\Models\Loadout;
 use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -32,11 +33,15 @@ test('all loadouts can be viewed', function () {
 });
 
 test('a loadout can be created', function () {
+    $gun = Gun::factory()->create();
+
     post('/loadouts', [
+        'gun_id' => $gun->id,
         'name' => 'new loadout',
     ])->assertRedirect();
 
     assertDatabaseHas(Loadout::class, [
+        'gun_id' => $gun->id,
         'name' => 'new loadout',
         'votes' => 0,
     ]);
@@ -54,16 +59,20 @@ test('a loadout can be viewed', function () {
 });
 
 test('a loadout can be updated', function () {
+    $gun = Gun::factory()->create();
+
     $loadout = Loadout::factory()->create([
         'name' => 'old loadout name',
     ]);
 
     put('/loadouts/'.$loadout->id, [
         'name' => 'new loadout name',
+        'gun_id' => $gun->id,
     ])->assertRedirect();
 
     assertDatabaseHas(Loadout::class, [
         'name' => 'new loadout name',
+        'gun_id' => $gun->id,
     ]);
 });
 

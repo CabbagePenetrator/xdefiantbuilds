@@ -1,3 +1,11 @@
+<script setup>
+import { Head } from '@inertiajs/vue3'
+
+defineProps({
+  loadouts: Array,
+})
+</script>
+
 <template>
-  <div>loadouts index</div>
+  <Head title="Loadouts" />
 </template>
