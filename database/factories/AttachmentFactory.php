@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\AttachmentType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class AttachmentFactory extends Factory
     {
         return [
             'name' => fake()->text(25),
+            'type' => fake()->randomElement(AttachmentType::cases()),
         ];
     }
 }
