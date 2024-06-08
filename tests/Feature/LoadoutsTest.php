@@ -21,14 +21,20 @@ beforeEach(function () {
 });
 
 test('the loadouts page can be viewed', function () {
-    Loadout::factory()->count(3)->create();
+    $category = Category::factory()->create([
+        'name' => 'assault',
+    ]);
+
+    $gun = Gun::factory()->for($category)->create();
+
+    Loadout::factory()->for($gun)->count(3)->create();
 
     get('/')
         ->assertOk()
         ->assertInertia(fn (Assert $page) => $page
             ->component('Loadouts/Index')
             ->has('loadouts', 3)
-            ->has('categories', 3)
+            ->has('categories', 1)
         );
 });
 

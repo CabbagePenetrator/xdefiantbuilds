@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,5 +25,12 @@ class Loadout extends Model
     public function attachments(): BelongsToMany
     {
         return $this->belongsToMany(Attachment::class);
+    }
+
+    public function scopeByCategory(Builder $query, string $category)
+    {
+        return $query->whereHas('gun.category', function ($query) use ($category) {
+            $query->where('name', $category);
+        });
     }
 }

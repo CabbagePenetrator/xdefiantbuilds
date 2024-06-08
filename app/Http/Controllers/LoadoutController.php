@@ -13,9 +13,7 @@ class LoadoutController extends Controller
     public function index()
     {
         $loadouts = Loadout::query()
-            ->whereHas('gun.category', function ($query) {
-                $query->where('name', 'Assault');
-            })
+            ->byCategory('assault')
             ->with('user', 'gun.category')
             ->get();
 
