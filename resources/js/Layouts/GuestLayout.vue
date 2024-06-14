@@ -1,22 +1,28 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <div
-    class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0"
-  >
-    <div>
-      <Link href="/">
-        <ApplicationLogo class="h-20 w-20 fill-current text-gray-500" />
+  <nav class="bg-dark-blue py-4 shadow-sm">
+    <div class="container mx-auto flex items-center justify-between px-4">
+      <Link
+        href="/"
+        class="text-lg font-bold uppercase italic md:text-left md:text-4xl"
+      >
+        XDefiant Builds
       </Link>
+      <button type="button">
+        <svg viewBox="0 0 20 20" fill="currentColor" class="size-5">
+          <path
+            fill-rule="evenodd"
+            d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Zm0 5.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
     </div>
-
-    <div
-      class="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg"
-    >
-      <slot />
-    </div>
-  </div>
+  </nav>
+  <main class="mx-auto py-4 md:py-8 lg:max-w-4xl lg:py-12">
+    <slot />
+  </main>
 </template>
