@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoryLoadoutController;
+use App\Http\Controllers\DownvoteLoadoutController;
 use App\Http\Controllers\LoadoutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UpvoteLoadoutController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -32,6 +34,14 @@ Route::put('/loadouts/{loadout}', [LoadoutController::class, 'update'])
 
 Route::delete('/loadouts/{loadout}', [LoadoutController::class, 'destroy'])
     ->name('loadouts.destroy')
+    ->middleware('auth');
+
+Route::post('/loadouts/{loadout}/upvote', UpvoteLoadoutController::class)
+    ->name('upvote-loadout')
+    ->middleware('auth');
+
+Route::post('/loadouts/{loadout}/downvote', DownvoteLoadoutController::class)
+    ->name('downvote-loadout')
     ->middleware('auth');
 
 Route::get('/{category:name}/loadouts', [CategoryLoadoutController::class, 'index'])

@@ -5,6 +5,7 @@ use App\Models\Category;
 use App\Models\Gun;
 use App\Models\Loadout;
 use App\Models\User;
+use App\Models\Vote;
 use Inertia\Testing\AssertableInertia as Assert;
 
 use function Pest\Laravel\actingAs;
@@ -13,6 +14,7 @@ use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\put;
+use function Pest\Laravel\withoutExceptionHandling;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
@@ -124,4 +126,51 @@ test('a loadout can be deleted', function () {
         ->assertRedirect();
 
     assertModelMissing($loadout);
+});
+
+test('a loadout can be upvoted', function () {
+    withoutExceptionHandling();
+    $loadout = Loadout::factory()->create();
+
+    post('/loadouts/'.$loadout->id.'/upvote')
+        ->assertRedirect();
+
+    expect($loadout->upvotes()->count())->toBe(1);
+});
+
+test('a loadout upvote can be removed', function () {
+    $loadout = Loadout::factory()->create();
+
+    Vote::factory()
+        ->for($loadout)->for($this->user)
+        ->upvote()
+        ->create();
+
+    post('/loadouts/'.$loadout->id.'/upvote')
+        ->assertRedirect();
+
+    expect($loadout->upvotes()->count())->toBe(0);
+});
+
+test('a loadout can be downvoted', function () {
+    $loadout = Loadout::factory()->create();
+
+    post('/loadouts/'.$loadout->id.'/downvote')
+        ->assertRedirect();
+
+    expect($loadout->downvotes()->count())->toBe(1);
+});
+
+test('a loadout downvote can be removed', function () {
+    $loadout = Loadout::factory()->create();
+
+    Vote::factory()
+        ->for($loadout)->for($this->user)
+        ->downvote()
+        ->create();
+
+    post('/loadouts/'.$loadout->id.'/downvote')
+        ->assertRedirect();
+
+    expect($loadout->downvotes()->count())->toBe(0);
 });
