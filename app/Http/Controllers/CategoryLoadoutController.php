@@ -12,8 +12,10 @@ class CategoryLoadoutController extends Controller
     public function index(Category $category)
     {
         $loadouts = Loadout::query()
-            ->byCategory($category->name)
+            ->select('*')
             ->with('user', 'gun.category')
+            ->byCategory($category->name)
+            ->withVotes()
             ->get();
 
         $categories = Category::query()->get();

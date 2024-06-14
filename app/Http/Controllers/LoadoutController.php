@@ -13,7 +13,9 @@ class LoadoutController extends Controller
     public function index(Request $request)
     {
         $loadouts = Loadout::query()
+            ->select('*')
             ->with('user', 'gun.category')
+            ->withVotes()
             ->get();
 
         $categories = Category::query()->get();
