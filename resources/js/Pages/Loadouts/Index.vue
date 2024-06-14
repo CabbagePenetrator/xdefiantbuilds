@@ -13,7 +13,7 @@ defineProps({
   <GuestLayout>
     <Head title="Loadouts" />
 
-    <div class="container mx-auto px-4">
+    <div class="container">
       <h1 class="text-xl md:text-3xl">Loadouts</h1>
 
       <Categories :categories="categories" />

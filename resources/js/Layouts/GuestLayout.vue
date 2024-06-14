@@ -3,8 +3,8 @@ import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <nav class="bg-dark-blue py-4 shadow-sm">
-    <div class="container mx-auto flex items-center justify-between px-4">
+  <nav class="bg-dark-blue py-4 shadow-sm md:py-6">
+    <div class="container flex items-center justify-between">
       <Link
         href="/"
         class="text-lg font-bold uppercase italic md:text-left md:text-4xl"

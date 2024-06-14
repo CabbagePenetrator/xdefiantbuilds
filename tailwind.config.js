@@ -21,6 +21,10 @@ export default {
       fontFamily: {
         sans: ['Helvetica', ...defaultTheme.fontFamily.sans],
       },
+      container: {
+        center: true,
+        padding: '1rem',
+      },
     },
   },
 
