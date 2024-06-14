@@ -10,10 +10,9 @@ use Illuminate\Http\Request;
 
 class LoadoutController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $loadouts = Loadout::query()
-            ->byCategory('assault')
             ->with('user', 'gun.category')
             ->get();
 
