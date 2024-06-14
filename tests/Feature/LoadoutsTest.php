@@ -53,6 +53,14 @@ test('loadouts for a category can be viewed', function () {
         );
 });
 
+test('the loadout form can be viewed', function () {
+    get('/loadouts/create')
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('Loadouts/Create')
+        );
+});
+
 test('a loadout can be created', function () {
     $gun = Gun::factory()->create();
 

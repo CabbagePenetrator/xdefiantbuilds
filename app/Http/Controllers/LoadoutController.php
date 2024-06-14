@@ -24,6 +24,11 @@ class LoadoutController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return inertia('Loadouts/Create');
+    }
+
     public function store(Request $request)
     {
         $request->validate([

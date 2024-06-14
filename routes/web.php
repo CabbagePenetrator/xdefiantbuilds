@@ -15,6 +15,10 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [LoadoutController::class, 'index'])
     ->name('home');
 
+Route::get('/loadouts/create', [LoadoutController::class, 'create'])
+    ->name('loadouts.create')
+    ->middleware('auth');
+
 Route::post('/loadouts', [LoadoutController::class, 'store'])
     ->name('loadouts.store')
     ->middleware('auth');
