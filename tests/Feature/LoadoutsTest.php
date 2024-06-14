@@ -13,7 +13,6 @@ use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\put;
-use function Pest\Laravel\withoutExceptionHandling;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
@@ -39,7 +38,6 @@ test('the loadouts page can be viewed', function () {
 });
 
 test('loadouts for a category can be viewed', function () {
-    withoutExceptionHandling();
     $category = Category::factory()->create();
 
     $gun = Gun::factory()->for($category)->create();
