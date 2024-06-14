@@ -11,6 +11,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Loadouts
 Route::get('/', [LoadoutController::class, 'index'])
     ->name('home');
 
