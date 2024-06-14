@@ -1,5 +1,5 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, router } from '@inertiajs/vue3'
 
 defineProps({
   categories: Array,
@@ -9,13 +9,20 @@ defineProps({
 <template>
   <div>
     <select
+      @change="(event) => router.get(event.target.value)"
       class="mt-4 w-full border-0 bg-blue uppercase shadow-md md:mt-8 md:hidden"
     >
-      <option :selected="route().params.category === 'home'">All</option>
+      <option
+        :selected="route().params.category === 'home'"
+        :value="route('home')"
+      >
+        All
+      </option>
       <option
         v-for="category in categories"
         :key="category.name"
         :selected="route().params.category === category.name"
+        :value="route('categories.loadouts', category)"
       >
         {{ category.name }}
       </option>
