@@ -55,11 +55,25 @@ test('loadouts for a category can be viewed', function () {
         );
 });
 
+test('the gun select page can be viewed', function () {
+    Category::factory()->count(3)->create();
+
+    get('/select-gun')
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('SelectGun')
+            ->has('categories', 3)
+        );
+});
+
 test('the loadout form can be viewed', function () {
-    get('/loadouts/create')
+    $gun = Gun::factory()->create();
+
+    get('/loadouts/'.$gun->id.'/create')
         ->assertOk()
         ->assertInertia(fn (Assert $page) => $page
             ->component('Loadouts/Create')
+            ->has('gun')
         );
 });
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryLoadoutController;
 use App\Http\Controllers\DownvoteLoadoutController;
 use App\Http\Controllers\LoadoutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SelectGunController;
 use App\Http\Controllers\UpvoteLoadoutController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [LoadoutController::class, 'index'])
     ->name('home');
 
-Route::get('/loadouts/create', [LoadoutController::class, 'create'])
+Route::get('/select-gun', SelectGunController::class)
+    ->name('select-gun')
+    ->middleware('auth');
+
+Route::get('/loadouts/{gun}/create', [LoadoutController::class, 'create'])
     ->name('loadouts.create')
     ->middleware('auth');
 

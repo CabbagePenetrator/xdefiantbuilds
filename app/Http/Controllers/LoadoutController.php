@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\GunResource;
 use App\Http\Resources\LoadoutResource;
 use App\Models\Category;
+use App\Models\Gun;
 use App\Models\Loadout;
 use Illuminate\Http\Request;
 
@@ -26,9 +28,11 @@ class LoadoutController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(Gun $gun)
     {
-        return inertia('Loadouts/Create');
+        return inertia('Loadouts/Create', [
+            'gun' => new GunResource($gun),
+        ]);
     }
 
     public function store(Request $request)
