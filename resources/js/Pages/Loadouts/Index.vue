@@ -14,9 +14,9 @@ defineProps({
   <AuthenticatedLayout>
     <Head title="Loadouts" />
 
-    <section class="container">
-      <h1 class="text-xl md:text-3xl">Loadouts</h1>
+    <template #heading>Loadouts</template>
 
+    <template #content>
       <Categories :categories="categories" />
 
       <div class="mt-6 grid gap-6 md:mt-8">
@@ -26,6 +26,6 @@ defineProps({
           :loadout="loadout"
         />
       </div>
-    </section>
+    </template>
   </AuthenticatedLayout>
 </template>

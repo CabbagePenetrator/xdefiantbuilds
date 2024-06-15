@@ -1,3 +1,12 @@
-<script setup></script>
+<script setup>
+import { Head } from '@inertiajs/vue3'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+</script>
 
-<template>create page</template>
+<template>
+  <AuthenticatedLayout>
+    <Head title="Create Loadout" />
+
+    <template #heading>Create Loadout</template>
+  </AuthenticatedLayout>
+</template>
