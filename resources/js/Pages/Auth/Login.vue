@@ -37,7 +37,7 @@ const submit = () => {
       {{ status }}
     </div>
 
-    <div class="container mx-auto pt-12 lg:max-w-md">
+    <div class="container mx-auto pt-12 lg:max-w-md lg:pt-0">
       <h1 class="text-center text-3xl sm:text-left">XDefiant Builds</h1>
       <form @submit.prevent="submit" class="mt-6 bg-dark-blue p-4 shadow-md">
         <h2 class="text-2xl">Login</h2>
