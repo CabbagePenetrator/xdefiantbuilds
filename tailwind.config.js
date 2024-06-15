@@ -17,6 +17,7 @@ export default {
         blue: '#2A3B56',
         'dark-blue': '#1C233D',
         yellow: '#EDCE52',
+        body: '#161b2f',
       },
       fontFamily: {
         sans: ['Helvetica', ...defaultTheme.fontFamily.sans],
